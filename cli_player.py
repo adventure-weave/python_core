@@ -18,15 +18,14 @@ def main():
     
     node = loaded[start_id]
     while node.choices:
-        print(chr(27) + "[2J")
         print(node)
         choice = None
         while choice is None:
-            try:
-                choice = node.choices[int(input('> ')) - 1]
-            except:
+            choice = node.interpret(input('> '))
+            if choice is None:
                 print("Input not recognized, try again")
-        node = loaded[choice.leads_to]
+        node = loaded[choice]
+        print(chr(27) + "[2J")
     
     print(node)
 
