@@ -37,15 +37,21 @@ class BaseNode:
             except:
                 return None
         elif self.input == 'type':
-            pass
+            result = max(x.interpret(received) for x in self.choices)
+
+            if result[0] is None:
+                return None
+            return result[1]
 
     def __str__(self):
         '''Returns markdown representation of itself'''
         paragraphs = ['# ' + self.title] if self.title else []
-        paragraphs += [
-            self.content,
-            '\n'.join(
-                '**%s.** %s' % (x+1, choice) for (x, choice) in enumerate(self.choices)
+        paragraphs.append(self.content)
+
+        if self.input == 'pick':
+            paragraphs.append(
+                '\n'.join(
+                    '**%s.** %s' % (x+1, choice) for (x, choice) in enumerate(self.choices)
+                )
             )
-        ]
         return '\n\n'.join(paragraphs)
