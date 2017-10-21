@@ -20,6 +20,7 @@ class BaseNode:
         self.choices = [
             load_choice(self, choice) for choice in (data.get('choices') or [])
         ]
+        self.is_start = data.get('is_start', False)
 
     def __str__(self):
         '''Returns markdown representation of itself'''
