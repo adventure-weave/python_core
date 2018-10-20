@@ -11,10 +11,21 @@ scene1:
   title: Your Surroundings
   content: Theres a lot of things around you, all of which are very interesting
   choices:
+    - name: Can we have one of those things where this is an actual text interpreter?
+      leads_to: scene2
     - name: Yeah just skip to the end
       leads_to: ending
     - name: Wait what was that thing at the beginning?
       leads_to: start
+scene2:
+  title: WOW AN ACTUAL TEXT GAME???
+  content: You stand inside a forest, possible directions are east, west, north, south, and back
+  input: type
+  choices:
+    - contains_any: ['north', 'south', 'east', 'west']
+      leads_to: ending
+    - contains_any: back
+      leads_to: scene1
 ending:
   title: The End
   content: Congratulations, you have completed this indubitably riveting adventure!
